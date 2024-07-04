@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `books`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `books` (
-  `isbn` varchar(13) NOT NULL,
-  `title` varchar(255) NOT NULL,
-  `author` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
-  `copies` int NOT NULL,
-  PRIMARY KEY (`isbn`)
+  `Masach` varchar(13) NOT NULL,
+  `Tensach` varchar(255) DEFAULT NULL,
+  `Tacgia` varchar(255) DEFAULT NULL,
+  `Theloai` varchar(255) DEFAULT NULL,
+  `Soluong` int DEFAULT NULL,
+  PRIMARY KEY (`Masach`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +38,7 @@ CREATE TABLE `books` (
 
 LOCK TABLES `books` WRITE;
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-INSERT INTO `books` VALUES ('1','sach1','tacgia1','theloai1',40),('2','sach2','tacgia2','theloai2',19);
+INSERT INTO `books` VALUES ('1','sach1','tacgia1','theloai1',39),('11','ten11','tg11','tl11',11),('12','sach12','tg12','tl12',12),('2','sach2','tacgia2','theloai2',18),('3','sach3','tacgia3','theloai1237',1),('4','sach4','tg4','tl4',30),('7','sach7','tacgia7','theloai7',70),('8','sach8','tacgia8','tl8',80);
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,17 +50,18 @@ DROP TABLE IF EXISTS `borrowings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `borrowings` (
-  `borrowing_id` int NOT NULL AUTO_INCREMENT,
-  `member_id` varchar(255) NOT NULL,
-  `isbn` varchar(13) NOT NULL,
-  `borrow_date` date NOT NULL,
-  `return_date` date DEFAULT NULL,
-  PRIMARY KEY (`borrowing_id`),
-  KEY `member_id` (`member_id`),
-  KEY `isbn` (`isbn`),
-  CONSTRAINT `borrowings_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`),
-  CONSTRAINT `borrowings_ibfk_2` FOREIGN KEY (`isbn`) REFERENCES `books` (`isbn`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Mamuon` int NOT NULL AUTO_INCREMENT,
+  `Mathanhvien` varchar(255) DEFAULT NULL,
+  `Masach` varchar(13) DEFAULT NULL,
+  `Ngaymuon` date DEFAULT NULL,
+  `Ngaytra` date DEFAULT NULL,
+  `DueDate` date DEFAULT NULL,
+  PRIMARY KEY (`Mamuon`),
+  KEY `member_id` (`Mathanhvien`),
+  KEY `isbn` (`Masach`),
+  CONSTRAINT `borrowings_ibfk_1` FOREIGN KEY (`Mathanhvien`) REFERENCES `members` (`Mathanhvien`),
+  CONSTRAINT `borrowings_ibfk_2` FOREIGN KEY (`Masach`) REFERENCES `books` (`Masach`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +70,7 @@ CREATE TABLE `borrowings` (
 
 LOCK TABLES `borrowings` WRITE;
 /*!40000 ALTER TABLE `borrowings` DISABLE KEYS */;
-INSERT INTO `borrowings` VALUES (1,'1','1','2024-01-01','2024-02-01'),(2,'2','2','2024-07-03','2024-07-03'),(3,'2','2','2024-07-03','2024-07-03');
+INSERT INTO `borrowings` VALUES (1,'1','1','2024-01-01','2024-02-01','2024-02-02'),(2,'2','2','2024-07-03','2024-07-04','2024-08-03'),(3,'2','2','2024-07-03','2024-07-04','2024-08-03'),(4,'2','2','2024-07-04','2024-07-04','2024-08-03'),(5,'1','2','2024-07-04','2024-07-04','2024-08-03'),(6,'2','7','2024-07-04','2024-07-04','2024-08-04'),(7,'1','1','2024-07-04',NULL,'2024-08-03'),(8,'1','2','2024-07-04',NULL,'2024-08-03'),(9,'2','7','2024-07-04','2024-07-04','2024-08-03'),(10,'2','3','2024-07-04',NULL,'2024-08-03'),(11,'2','3','2024-07-04',NULL,'2024-08-03'),(12,'1','3','2024-07-04','2024-07-04','2024-08-03'),(13,'1','11','2024-07-04','2024-07-04','2024-08-03'),(14,'2','11','2024-07-04','2024-07-04','2024-08-03');
 /*!40000 ALTER TABLE `borrowings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,10 +82,10 @@ DROP TABLE IF EXISTS `librarians`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `librarians` (
-  `librarian_id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `shift` varchar(255) NOT NULL,
-  PRIMARY KEY (`librarian_id`)
+  `Mathuthu` varchar(255) NOT NULL,
+  `Tenthuthu` varchar(255) DEFAULT NULL,
+  `Calamviec` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Mathuthu`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -106,10 +107,10 @@ DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `members` (
-  `member_id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL,
-  PRIMARY KEY (`member_id`)
+  `Mathanhvien` varchar(255) NOT NULL,
+  `Tenthanhvien` varchar(255) DEFAULT NULL,
+  `Diachi` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`Mathanhvien`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -119,7 +120,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES ('1','lam','dc1'),('2','lan','dc2');
+INSERT INTO `members` VALUES ('1','tv1','dc1'),('2','lan','dc2'),('3','thanhvien4','diachi3'),('4','thanhvien3','diachi4');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +133,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-07-03 17:55:11
+-- Dump completed on 2024-07-04 16:39:41
